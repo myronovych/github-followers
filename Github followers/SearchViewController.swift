@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
+    
     let logo = UIImageView()
     let searchField = GFTextField()
     let searchButton = GFButton(title: "Get followers", backgroundColor: .systemGreen)
@@ -32,9 +32,16 @@ class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
     }
-
+    
     @objc func pushFollowersListVC(){
-        guard isUsernameEntered else { return }
+        guard isUsernameEntered else {
+            presentGFAlert(titleText: "Empty search field", message: "We have to know for who to look :)", buttonText: "OK")
+            
+            return
+        }
+        
+        
+        
         let followersListVC = FollowersListViewController()
         followersListVC.username = searchField.text!
         followersListVC.title = searchField.text!
@@ -51,7 +58,7 @@ class SearchViewController: UIViewController {
     private func configureLogo() {
         view.addSubview(logo)
         logo.translatesAutoresizingMaskIntoConstraints = false
-
+        
         logo.image = UIImage(named: "gh-logo")
         
         NSLayoutConstraint.activate([
