@@ -14,6 +14,10 @@ class SearchViewController: UIViewController {
     let searchField = GFTextField()
     let searchButton = GFButton(title: "Get followers", backgroundColor: .systemGreen)
     
+    var isUsernameEntered: Bool {
+        return !searchField.text!.isEmpty
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -21,11 +25,26 @@ class SearchViewController: UIViewController {
         configureLogo()
         configureSearchField()
         configureSearchButton()
+        configureDismissKeyboardTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+
+    @objc func pushFollowersListVC(){
+        guard isUsernameEntered else { return }
+        let followersListVC = FollowersListViewController()
+        followersListVC.username = searchField.text!
+        followersListVC.title = searchField.text!
+        
+        navigationController?.pushViewController(followersListVC, animated: true)
+    }
+    
+    func configureDismissKeyboardTapGesture() {
+        let tap = UITapGestureRecognizer.init(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
     }
     
     
@@ -46,8 +65,8 @@ class SearchViewController: UIViewController {
     
     private func configureSearchField() {
         view.addSubview(searchField)
-        searchField.translatesAutoresizingMaskIntoConstraints = false
-                
+        searchField.delegate = self
+        
         NSLayoutConstraint.activate([
             searchField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50),
             searchField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
@@ -58,7 +77,7 @@ class SearchViewController: UIViewController {
     
     private func configureSearchButton() {
         view.addSubview(searchButton)
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.addTarget(self, action: #selector(pushFollowersListVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
@@ -67,6 +86,13 @@ class SearchViewController: UIViewController {
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
         ])
     }
-
-
 }
+
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowersListVC()
+        return true
+    }
+}
+
+
