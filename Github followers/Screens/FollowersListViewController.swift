@@ -9,7 +9,7 @@
 import UIKit
 
 class FollowersListViewController: UIViewController {
-
+    
     var username: String!
     
     override func viewDidLoad() {
@@ -17,15 +17,17 @@ class FollowersListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .systemBackground
         
-        NetworkManager.shared.getFollowers(username: username, page: 1) { (followers, error) in
-            if let followers = followers {
-                print("Total followers: \(followers.count)")
+        NetworkManager.shared.getFollowers(username: username, page: 1) { result in
+            
+            switch result {
+            case .success(let followers):
                 print(followers)
+                
+            case .failure(let error):
+                self.presentGFAlert(titleText: "Error", message: error.rawValue, buttonText: "OK")
             }
             
-            if let error = error {
-                presentGFAlert(titleText: "Error", message: error, buttonText: "OK")
-            }
+            
         }
     }
     
@@ -33,8 +35,8 @@ class FollowersListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
-
+        
     }
-
-
+    
+    
 }
