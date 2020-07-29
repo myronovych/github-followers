@@ -25,6 +25,7 @@ class GFFollowerCollectionViewCell: UICollectionViewCell {
     
     func set(follower: Follower){
         usernameLabel.text = follower.login
+        avatarView.setImage(urlString: follower.avatarUrl)
     }
     
     private func configure() {

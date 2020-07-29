@@ -29,7 +29,7 @@ class FollowersListViewController: UIViewController {
     }
     
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnsLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnsLayout(in: view))
         collectionView.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         collectionView.register(GFFollowerCollectionViewCell.self, forCellWithReuseIdentifier: GFFollowerCollectionViewCell.cellID)
@@ -40,30 +40,15 @@ class FollowersListViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
-    private func createThreeColumnsLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        let width = view.bounds.width
-        let padding: CGFloat = 12
-        let minimumSpaceBetweenColumns: CGFloat = 10
-        let availableSpace = width - (padding * 2) - (minimumSpaceBetweenColumns * 2)
-        let widthForCell = availableSpace / 3
-        
-        layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        layout.itemSize = CGSize(width: widthForCell, height: widthForCell + 38)
-        
-        return layout
-    }
 
     fileprivate func getFollowers() {
-        NetworkManager.shared.getFollowers(username: username, page: 1) { result in
+        NetworkManager.shared.getFollowers(username: username, page: 1) { [weak self] result in
+            guard let self = self else { return }
             
             switch result {
             case .success(let followers):
                 self.followers = followers
                 self.updateData()
-                print(followers)
                 
             case .failure(let error):
                 self.presentGFAlert(titleText: "Error", message: error.rawValue, buttonText: "OK")

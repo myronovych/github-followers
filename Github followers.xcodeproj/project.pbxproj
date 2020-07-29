@@ -26,6 +26,7 @@
 		53814D8024C9A6D400D3D3CE /* GFTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53814D7F24C9A6D400D3D3CE /* GFTextField.swift */; };
 		53E5124124D1717C0028DF30 /* GFFollowerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5124024D1717C0028DF30 /* GFFollowerCollectionViewCell.swift */; };
 		53E5124324D171F40028DF30 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5124224D171F40028DF30 /* GFAvatarImageView.swift */; };
+		53E5124524D1B5250028DF30 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E5124424D1B5250028DF30 /* UIHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		53814D7F24C9A6D400D3D3CE /* GFTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTextField.swift; sourceTree = "<group>"; };
 		53E5124024D1717C0028DF30 /* GFFollowerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerCollectionViewCell.swift; sourceTree = "<group>"; };
 		53E5124224D171F40028DF30 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
+		53E5124424D1B5250028DF30 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				533E54DA24CF4619002D399D /* ErrorMessage.swift */,
+				53E5124424D1B5250028DF30 /* UIHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				53814D8024C9A6D400D3D3CE /* GFTextField.swift in Sources */,
 				53814D7A24C9839800D3D3CE /* SearchViewController.swift in Sources */,
 				53814D7E24C9A55E00D3D3CE /* GFButton.swift in Sources */,
+				53E5124524D1B5250028DF30 /* UIHelper.swift in Sources */,
 				53E5124324D171F40028DF30 /* GFAvatarImageView.swift in Sources */,
 				531B563024CC846E00BD438F /* UIViewController+Alert.swift in Sources */,
 				531B562824CC492600BD438F /* FollowersListViewController.swift in Sources */,
