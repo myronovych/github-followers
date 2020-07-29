@@ -47,5 +47,10 @@ class GFFollowerCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarView.image = GFAvatarImageView.placeholder
+    }
+    
     
 }

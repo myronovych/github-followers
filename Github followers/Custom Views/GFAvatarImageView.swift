@@ -10,7 +10,7 @@ import UIKit
 
 class GFAvatarImageView: UIImageView {
     
-    let placeholder = UIImage(named: "avatar-placeholder")
+    static let placeholder = UIImage(named: "avatar-placeholder")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +25,7 @@ class GFAvatarImageView: UIImageView {
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 20
         clipsToBounds = true
-        image = placeholder
+        image = GFAvatarImageView.placeholder
     }
     
     func setImage(urlString: String) {

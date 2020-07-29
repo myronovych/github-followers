@@ -15,16 +15,19 @@ class FollowersListViewController: UIViewController {
     }
     
     var username: String!
-    var followers: [Follower]!
+    var followers = [Follower]()
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    
+    var page = 1
+    var hasMoreFollowers = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         
         configureCollectionView()
-        getFollowers()
+        getFollowers(page: page)
         configureDataSource()
     }
     
@@ -33,6 +36,8 @@ class FollowersListViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         view.addSubview(collectionView)
         collectionView.register(GFFollowerCollectionViewCell.self, forCellWithReuseIdentifier: GFFollowerCollectionViewCell.cellID)
+        
+        collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,15 +45,21 @@ class FollowersListViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
-    fileprivate func getFollowers() {
-        NetworkManager.shared.getFollowers(username: username, page: 1) { [weak self] result in
+    
+    fileprivate func getFollowers(page: Int) {
+        showLoadingScreen()
+        NetworkManager.shared.getFollowers(username: username, page: page) { [weak self] result in
             guard let self = self else { return }
+            
+            self.stopLoadingScreen()
+            
+            
             
             switch result {
             case .success(let followers):
-                self.followers = followers
+                self.followers.append(contentsOf: followers)
                 self.updateData()
+                if followers.count < 100 { self.hasMoreFollowers = false}
                 
             case .failure(let error):
                 self.presentGFAlert(titleText: "Error", message: error.rawValue, buttonText: "OK")
@@ -71,8 +82,24 @@ class FollowersListViewController: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
         snapshot.appendItems(followers)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        DispatchQueue.main.async {
+            
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
         
     }
     
+}
+
+extension FollowersListViewController: UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height && hasMoreFollowers {
+            page += 1
+            getFollowers(page: page)
+        }
+    }
 }
