@@ -9,5 +9,10 @@
 import Foundation
 
 struct SFSymbols {
-   static let pin =  "mappin.and.ellipse"
+    static let pin =  "mappin.and.ellipse"
+    static let repos = "folder"
+    static let gist = "text.alignleft"
+    static let following = "heart"
+    static let followers = "person.3"
 }
+
