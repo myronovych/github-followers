@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     var user: Follower!
+    
     var headerView = UIView()
     var firstView = UIView()
     var secondView = UIView()
@@ -34,6 +35,8 @@ class ProfileViewController: UIViewController {
             case .success(let user):
                 DispatchQueue.main.async {
                     self.add(childVC: GFProfileHeaderViewController(user: user), to: self.headerView)
+                    self.add(childVC: GFRepoItemViewController(user: user), to: self.firstView)
+                    self.add(childVC: GFFollowingItemViewController(user: user), to: self.secondView)
                 }
                 print(user)
             case .failure(let error):
@@ -59,9 +62,6 @@ class ProfileViewController: UIViewController {
                 item.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
             ])
         }
-
-        firstView.backgroundColor = .systemRed
-        secondView.backgroundColor = .systemTeal
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
