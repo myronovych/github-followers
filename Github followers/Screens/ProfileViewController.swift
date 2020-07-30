@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController {
                     self.add(childVC: GFProfileHeaderViewController(user: user), to: self.headerView)
                     self.add(childVC: GFRepoItemViewController(user: user), to: self.firstView)
                     self.add(childVC: GFFollowingItemViewController(user: user), to: self.secondView)
-                    self.dateLabel.text = "Github since \(user.createdAt.convertToMonthDay())"
+                    self.dateLabel.text = "Github since \(user.createdAt.convertToMonthDay() ?? "N/A")"
                 }
                 print(user)
             case .failure(let error):
