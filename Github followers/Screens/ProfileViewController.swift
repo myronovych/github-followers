@@ -18,8 +18,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        layoutUI()
         getInfo() 
+        layoutUI()
     }
     
     private func configure() {
