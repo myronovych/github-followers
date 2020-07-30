@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
     var headerView = UIView()
     var firstView = UIView()
     var secondView = UIView()
+    var dateLabel = GFBodyLabel(textAlignment: .center)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,7 @@ class ProfileViewController: UIViewController {
                     self.add(childVC: GFProfileHeaderViewController(user: user), to: self.headerView)
                     self.add(childVC: GFRepoItemViewController(user: user), to: self.firstView)
                     self.add(childVC: GFFollowingItemViewController(user: user), to: self.secondView)
+                    self.dateLabel.text = "Github since \(user.createdAt.convertToMonthDay())"
                 }
                 print(user)
             case .failure(let error):
@@ -50,7 +52,7 @@ class ProfileViewController: UIViewController {
     }
     
     private func layoutUI() {
-        let views = [headerView, firstView, secondView]
+        let views = [headerView, firstView, secondView, dateLabel]
         let padding: CGFloat = 20
 
         for item in views {
@@ -71,7 +73,10 @@ class ProfileViewController: UIViewController {
             firstView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
             
             secondView.heightAnchor.constraint(equalToConstant: 140),
-            secondView.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: padding)
+            secondView.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: padding),
+            
+            dateLabel.topAnchor.constraint(equalTo: secondView.bottomAnchor, constant: padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
