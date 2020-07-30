@@ -12,14 +12,23 @@ class ProfileViewController: UIViewController {
     
     var user: Follower!
     var headerView = UIView()
+    var firstView = UIView()
+    var secondView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
         configure()
-        print(user.login)
         layoutUI()
-        NetworkManager.shared.getUser(username: user.login) {[weak self] (result) in
+        getInfo() 
+    }
+    
+    private func configure() {
+        view.backgroundColor = .systemBackground
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
+    }
+    
+    private func getInfo() {
+        NetworkManager.shared.getUser(username: user.login) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let user):
@@ -31,13 +40,6 @@ class ProfileViewController: UIViewController {
                 self.presentGFAlert(titleText: "Error", message: error.rawValue, buttonText: "OK")
             }
         }
-        
-        
-    }
-    
-    
-    private func configure() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
     }
     
     @objc private func dismissVC() {
@@ -45,14 +47,31 @@ class ProfileViewController: UIViewController {
     }
     
     private func layoutUI() {
-        view.addSubview(headerView)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        let views = [headerView, firstView, secondView]
+        let padding: CGFloat = 20
 
+        for item in views {
+            view.addSubview(item)
+            item.translatesAutoresizingMaskIntoConstraints = false
+
+            NSLayoutConstraint.activate([
+                item.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+                item.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            ])
+        }
+
+        firstView.backgroundColor = .systemRed
+        secondView.backgroundColor = .systemTeal
+        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180)
+            headerView.heightAnchor.constraint(equalToConstant: 180),
+            
+            firstView.heightAnchor.constraint(equalToConstant: 140),
+            firstView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: padding),
+            
+            secondView.heightAnchor.constraint(equalToConstant: 140),
+            secondView.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: padding)
         ])
     }
     
