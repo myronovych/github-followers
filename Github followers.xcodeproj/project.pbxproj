@@ -17,6 +17,7 @@
 		533E54D824CF2E76002D399D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E54D724CF2E76002D399D /* NetworkManager.swift */; };
 		533E54DB24CF4619002D399D /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E54DA24CF4619002D399D /* ErrorMessage.swift */; };
 		534A365724D29FE400058439 /* GFNoFollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534A365624D29FE400058439 /* GFNoFollowersView.swift */; };
+		534A365924D2C91200058439 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534A365824D2C91200058439 /* ProfileViewController.swift */; };
 		53814D6624C96EBE00D3D3CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53814D6524C96EBE00D3D3CE /* AppDelegate.swift */; };
 		53814D6824C96EBE00D3D3CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53814D6724C96EBE00D3D3CE /* SceneDelegate.swift */; };
 		53814D6F24C96EC300D3D3CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53814D6E24C96EC300D3D3CE /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		533E54D724CF2E76002D399D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		533E54DA24CF4619002D399D /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		534A365624D29FE400058439 /* GFNoFollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFNoFollowersView.swift; sourceTree = "<group>"; };
+		534A365824D2C91200058439 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		53814D6224C96EBD00D3D3CE /* Github followers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Github followers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53814D6524C96EBE00D3D3CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53814D6724C96EBE00D3D3CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				53814D7B24C983BD00D3D3CE /* FavoritesViewController.swift */,
 				531B562724CC492600BD438F /* FollowersListViewController.swift */,
 				53814D7924C9839800D3D3CE /* SearchViewController.swift */,
+				534A365824D2C91200058439 /* ProfileViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			files = (
 				531B56ED24CEC9E600BD438F /* User.swift in Sources */,
 				531B562E24CC639A00BD438F /* GFAlertViewController.swift in Sources */,
+				534A365924D2C91200058439 /* ProfileViewController.swift in Sources */,
 				534A365724D29FE400058439 /* GFNoFollowersView.swift in Sources */,
 				53814D8024C9A6D400D3D3CE /* GFTextField.swift in Sources */,
 				53814D7A24C9839800D3D3CE /* SearchViewController.swift in Sources */,
