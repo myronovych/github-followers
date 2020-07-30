@@ -58,6 +58,13 @@ class FollowersListViewController: UIViewController {
             switch result {
             case .success(let followers):
                 self.followers.append(contentsOf: followers)
+                if followers.count == 0 {
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(message: "This user has no followers😟", view: self.view)
+                    }
+                    
+                    return
+                }
                 self.updateData()
                 if followers.count < 100 { self.hasMoreFollowers = false}
                 
@@ -87,6 +94,12 @@ class FollowersListViewController: UIViewController {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
         
+    }
+    
+    func showEmptyStateView(message: String, view: UIView) {
+        let emptyView = GFNoFollowersView(message: message)
+        emptyView.frame = view.bounds
+        view.addSubview(emptyView)
     }
     
 }
