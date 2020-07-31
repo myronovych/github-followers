@@ -14,7 +14,7 @@ class GFItemInfoViewController: UIViewController {
     let secondItemInfo = GFItemInfoView()
     let hstack = UIStackView()
     let button = GFButton()
-    
+    weak var delegate: ProfileViewControllerDelegate!
     var user: User!
     
     init(user: User){
@@ -30,14 +30,20 @@ class GFItemInfoViewController: UIViewController {
         super.viewDidLoad()
         
         configureBackground()
+        configureActionButton()
         layoutUI()
         configureStack()
     }
     
+    @objc func actionButtonPressed() {}
     
     private func configureBackground() {
         view.layer.cornerRadius = 10
         view.backgroundColor = .secondarySystemBackground
+    }
+    
+    private func configureActionButton() {
+        button.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
     }
     
     private func configureStack() {
@@ -67,4 +73,6 @@ class GFItemInfoViewController: UIViewController {
             button.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
+    
+
 }

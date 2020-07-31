@@ -23,4 +23,8 @@ class GFFollowingItemViewController: GFItemInfoViewController {
     private func configureButton() {
         button.set(title: "Followers", backgroundColor: .systemGreen)
     }
+    
+    override func actionButtonPressed() {
+        delegate.didPressGitHubFollowers(user: user)
+    }
 }

@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import SafariServices
+
+protocol ProfileViewControllerDelegate: class {
+    func didPressGitHubProfile(user: User)
+    func didPressGitHubFollowers(user: User)
+}
 
 class ProfileViewController: UIViewController {
     
@@ -16,6 +22,7 @@ class ProfileViewController: UIViewController {
     var firstView = UIView()
     var secondView = UIView()
     var dateLabel = GFBodyLabel(textAlignment: .center)
+    var delegate: FollowersListViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +42,28 @@ class ProfileViewController: UIViewController {
             switch result {
             case .success(let user):
                 DispatchQueue.main.async {
-                    self.add(childVC: GFProfileHeaderViewController(user: user), to: self.headerView)
-                    self.add(childVC: GFRepoItemViewController(user: user), to: self.firstView)
-                    self.add(childVC: GFFollowingItemViewController(user: user), to: self.secondView)
-                    self.dateLabel.text = "Github since \(user.createdAt.convertToMonthDay() ?? "N/A")"
+                    self.configureElements(user: user)
                 }
                 print(user)
             case .failure(let error):
                 self.presentGFAlert(titleText: "Error", message: error.rawValue, buttonText: "OK")
             }
         }
+    }
+    
+    func configureElements(user: User) {
+        let headerVC = GFProfileHeaderViewController(user: user)
+        
+        let repoVC = GFRepoItemViewController(user: user)
+        repoVC.delegate = self
+        
+        let followersVC = GFFollowingItemViewController(user: user)
+        followersVC.delegate = self
+        
+        self.add(childVC: headerVC, to: self.headerView)
+        self.add(childVC: repoVC, to: self.firstView)
+        self.add(childVC: followersVC, to: self.secondView)
+        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthDay() ?? "N/A")"
     }
     
     @objc private func dismissVC() {
@@ -88,3 +107,28 @@ class ProfileViewController: UIViewController {
     }
     
 }
+
+extension ProfileViewController: ProfileViewControllerDelegate {
+    func didPressGitHubProfile(user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlert(titleText: "No followers", message: "This user doesn't have any followers.", buttonText: "OK")
+            return
+        }
+        presentSafariView(withURL: url)
+    }
+    
+    func didPressGitHubFollowers(user: User) {
+        guard user.followers != 0 else {
+            presentGFAlert(titleText: "No followers", message: "This user doesn't have any followers :c", buttonText: "OK")
+            return
+        }
+        
+        delegate.requestFollowers(for: user)
+        dismissVC()
+        
+    }
+    
+    
+}
+
+
