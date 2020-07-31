@@ -60,4 +60,11 @@ extension UIViewController {
     }
     
     
+    func showEmptyStateView(message: String, view: UIView) {
+        let emptyView = GFNoFollowersView(message: message)
+        emptyView.frame = view.bounds
+        view.addSubview(emptyView)
+    }
+    
+    
 }

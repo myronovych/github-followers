@@ -74,6 +74,7 @@ class FollowersListViewController: UIViewController {
                     
                     return
                 }
+                
                 self.updateData(on: followers)
                 if followers.count < 100 { self.hasMoreFollowers = false}
                 
@@ -114,11 +115,7 @@ class FollowersListViewController: UIViewController {
         
     }
     
-    func showEmptyStateView(message: String, view: UIView) {
-        let emptyView = GFNoFollowersView(message: message)
-        emptyView.frame = view.bounds
-        view.addSubview(emptyView)
-    }
+    
     
     @objc func addButtonPressed() {
         showLoadingScreen()
