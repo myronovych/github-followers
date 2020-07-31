@@ -102,7 +102,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
             
             guard let error = error else { return }
             
-            self.presentGFAlert(titleText: "Error occured", message: "Error occured while removing user from favorites. Try again.", buttonText: "OK")
+            self.presentGFAlert(titleText: "Error occured", message: error.rawValue, buttonText: "OK")
             
         }
     }
