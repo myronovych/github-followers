@@ -33,6 +33,11 @@ class FollowersListViewController: UIViewController {
         getFollowers(page: page)
         configureDataSource()
         configureSearchController()
+        configureAddButton()
+    }
+    
+    func configureAddButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
     }
     
     func configureCollectionView() {
@@ -113,6 +118,10 @@ class FollowersListViewController: UIViewController {
         let emptyView = GFNoFollowersView(message: message)
         emptyView.frame = view.bounds
         view.addSubview(emptyView)
+    }
+    
+    @objc func addButtonPressed() {
+        
     }
     
 }
