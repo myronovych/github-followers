@@ -9,10 +9,7 @@
 import UIKit
 import SafariServices
 
-protocol ProfileViewControllerDelegate: class {
-    func didPressGitHubProfile(user: User)
-    func didPressGitHubFollowers(user: User)
-}
+
 
 class ProfileViewController: UIViewController {
     
@@ -54,11 +51,9 @@ class ProfileViewController: UIViewController {
     func configureElements(user: User) {
         let headerVC = GFProfileHeaderViewController(user: user)
         
-        let repoVC = GFRepoItemViewController(user: user)
-        repoVC.delegate = self
+        let repoVC = GFRepoItemViewController(user: user, delegate: self)
         
-        let followersVC = GFFollowingItemViewController(user: user)
-        followersVC.delegate = self
+        let followersVC = GFFollowingItemViewController(user: user, delegate: self)
         
         self.add(childVC: headerVC, to: self.headerView)
         self.add(childVC: repoVC, to: self.firstView)
@@ -95,7 +90,7 @@ class ProfileViewController: UIViewController {
             secondView.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: padding),
             
             dateLabel.topAnchor.constraint(equalTo: secondView.bottomAnchor, constant: padding),
-            dateLabel.heightAnchor.constraint(equalToConstant: 20)
+            dateLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -108,7 +103,7 @@ class ProfileViewController: UIViewController {
     
 }
 
-extension ProfileViewController: ProfileViewControllerDelegate {
+extension ProfileViewController: FollowingItemInfoDelegate, RepoItemInfoDelegate {
     func didPressGitHubProfile(user: User) {
         guard let url = URL(string: user.htmlUrl) else {
             presentGFAlert(titleText: "No followers", message: "This user doesn't have any followers.", buttonText: "OK")

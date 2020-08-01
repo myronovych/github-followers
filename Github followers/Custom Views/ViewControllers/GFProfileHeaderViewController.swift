@@ -36,12 +36,7 @@ class GFProfileHeaderViewController: UIViewController {
     }
     
     private func addElements() {
-        view.addSubview(avatarImage)
-        view.addSubview(usernameLabel)
-        view.addSubview(nameLabel)
-        view.addSubview(locationLabel)
-        view.addSubview(locationImageView)
-        view.addSubview(bioLabel)
+        view.addSubviews(avatarImage, usernameLabel, nameLabel, locationLabel, locationImageView, bioLabel)
     }
     
     private func configureElements() {

@@ -14,7 +14,6 @@ class GFItemInfoViewController: UIViewController {
     let secondItemInfo = GFItemInfoView()
     let hstack = UIStackView()
     let button = GFButton()
-    weak var delegate: ProfileViewControllerDelegate!
     var user: User!
     
     init(user: User){
@@ -54,8 +53,7 @@ class GFItemInfoViewController: UIViewController {
     }
     
     private func layoutUI() {
-        view.addSubview(hstack)
-        view.addSubview(button)
+        view.addSubviews(hstack, button)
         
         hstack.translatesAutoresizingMaskIntoConstraints = false
         

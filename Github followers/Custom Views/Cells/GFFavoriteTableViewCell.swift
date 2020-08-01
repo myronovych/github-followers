@@ -24,8 +24,7 @@ class GFFavoriteTableViewCell: UITableViewCell {
     }
     
     private func configure() {
-        addSubview(avatar)
-        addSubview(usernameLabel)
+        addSubviews(avatar, usernameLabel)
         
         accessoryType = .disclosureIndicator
         

@@ -33,8 +33,7 @@ class GFFollowerCollectionViewCell: UICollectionViewCell {
     }
     
     private func configure() {
-        addSubview(avatarView)
-        addSubview(usernameLabel)
+        addSubviews(avatarView, usernameLabel)
         
         let padding: CGFloat = 8
         

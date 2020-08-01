@@ -30,8 +30,7 @@ class GFNoFollowersView: UIView {
     private func configure() {
         image.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(textLabel)
-        addSubview(image)
+        addSubviews(textLabel, image)
         
         textLabel.textColor = .secondaryLabel
         textLabel.numberOfLines = 3

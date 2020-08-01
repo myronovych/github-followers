@@ -28,9 +28,7 @@ class GFItemInfoView: UIView {
     }
     
     func configure() {
-        addSubview(iconImageView)
-        addSubview(titleLabel)
-        addSubview(countLabel)
+        addSubviews(iconImageView, titleLabel, countLabel)
         
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         iconImageView.tintColor = .black
