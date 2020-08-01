@@ -40,11 +40,10 @@ class SearchViewController: UIViewController {
             return
         }
         
+        searchField.resignFirstResponder()
         
+        let followersListVC = FollowersListViewController(username: searchField.text!)
         
-        let followersListVC = FollowersListViewController()
-        followersListVC.username = searchField.text!
-        followersListVC.title = searchField.text!
         
         navigationController?.pushViewController(followersListVC, animated: true)
     }
@@ -59,7 +58,7 @@ class SearchViewController: UIViewController {
         view.addSubview(logo)
         logo.translatesAutoresizingMaskIntoConstraints = false
         
-        logo.image = UIImage(named: "gh-logo")
+        logo.image = Images.ghLoho
         
         NSLayoutConstraint.activate([
             logo.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
@@ -73,6 +72,7 @@ class SearchViewController: UIViewController {
     private func configureSearchField() {
         view.addSubview(searchField)
         searchField.delegate = self
+        searchField.clearButtonMode = .whileEditing
         
         NSLayoutConstraint.activate([
             searchField.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 50),

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Oleksandr Myronovych. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct SFSymbols {
     static let pin =  "mappin.and.ellipse"
@@ -14,5 +14,9 @@ struct SFSymbols {
     static let gist = "text.alignleft"
     static let following = "heart"
     static let followers = "person.3"
+}
+
+struct Images {
+    static let ghLoho = UIImage(named: "gh-logo")
 }
 

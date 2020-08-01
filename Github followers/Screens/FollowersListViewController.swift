@@ -25,6 +25,16 @@ class FollowersListViewController: UIViewController {
     var hasMoreFollowers = true
     var isSearching = false
     
+    init(username: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.username = username
+        title = username
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -62,8 +72,7 @@ class FollowersListViewController: UIViewController {
             
             self.stopLoadingScreen()
             
-            
-            
+
             switch result {
             case .success(let followers):
                 self.followers.append(contentsOf: followers)
@@ -75,7 +84,7 @@ class FollowersListViewController: UIViewController {
                     return
                 }
                 
-                self.updateData(on: followers)
+                self.updateData(on: self.followers)
                 if followers.count < 100 { self.hasMoreFollowers = false}
                 
             case .failure(let error):

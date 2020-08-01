@@ -84,10 +84,8 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorite = favorites[indexPath.row]
-        let destVC = FollowersListViewController()
-        
-        destVC.username = favorite.login
-        destVC.title =  favorite.login
+        let destVC = FollowersListViewController(username: favorite.login)
+
         
         navigationController?.pushViewController(destVC, animated: true)
     }
@@ -95,13 +93,13 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         let favorite = favorites[indexPath.row]
+        
         favorites.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .left)
+        
         PersistenceManager.updateWith(follower: favorite, action: .remove) {[weak self] (error) in
             guard let self = self else { return }
-            
             guard let error = error else { return }
-            
             self.presentGFAlert(titleText: "Error occured", message: error.rawValue, buttonText: "OK")
             
         }
