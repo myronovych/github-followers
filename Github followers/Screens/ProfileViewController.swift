@@ -63,7 +63,7 @@ class ProfileViewController: UIViewController {
         self.add(childVC: headerVC, to: self.headerView)
         self.add(childVC: repoVC, to: self.firstView)
         self.add(childVC: followersVC, to: self.secondView)
-        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthDay() ?? "N/A")"
+        self.dateLabel.text = "Github since \(user.createdAt.convertToMonthYearString())"
     }
     
     @objc private func dismissVC() {

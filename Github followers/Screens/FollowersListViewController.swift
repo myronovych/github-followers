@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FollowersListViewController: UIViewController {
+class FollowersListViewController: GFDataLoadingVC {
     
     enum Section {
         case main

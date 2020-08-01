@@ -45,7 +45,7 @@ class GFProfileHeaderViewController: UIViewController {
     }
     
     private func configureElements() {
-        avatarImage.setImage(urlString: user.avatarUrl)
+        setAvatarImage()
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "No name"
         locationImageView.image = UIImage(systemName: SFSymbols.pin)
@@ -53,6 +53,15 @@ class GFProfileHeaderViewController: UIViewController {
         locationLabel.text = user.location ?? "No location"
         bioLabel.text = user.bio ?? "No bio"
         bioLabel.numberOfLines = 3
+    }
+    
+    private func setAvatarImage() {
+        NetworkManager.shared.downloadImage(urlString: user.avatarUrl) {[weak self] image in
+            guard let image = image else {
+                return
+            }
+            self?.avatarImage.image = image
+        }
     }
     
     private func layoutElements() {
