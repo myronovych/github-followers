@@ -10,7 +10,7 @@ import UIKit
 
 class GFAvatarImageView: UIImageView {
     
-    static let placeholder = UIImage(named: "avatar-placeholder")
+    static let placeholder = Images.placeholder
     
     override init(frame: CGRect) {
         super.init(frame: frame)

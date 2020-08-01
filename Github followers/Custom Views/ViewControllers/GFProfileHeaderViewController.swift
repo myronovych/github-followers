@@ -48,7 +48,7 @@ class GFProfileHeaderViewController: UIViewController {
         setAvatarImage()
         usernameLabel.text = user.login
         nameLabel.text = user.name ?? "No name"
-        locationImageView.image = UIImage(systemName: SFSymbols.pin)
+        locationImageView.image = SFSymbols.pin
         locationImageView.tintColor = .secondaryLabel
         locationLabel.text = user.location ?? "No location"
         bioLabel.text = user.bio ?? "No bio"

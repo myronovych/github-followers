@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UIHelper {
+enum UIHelper {
     static func createThreeColumnsLayout(in view: UIView) -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         

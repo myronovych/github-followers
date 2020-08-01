@@ -11,7 +11,7 @@ import UIKit
 class GFNoFollowersView: UIView {
 
     let textLabel = GFTitleLabel(textAlignment: .center, fontSize: 30)
-    let image = UIImageView(image: UIImage(named: "empty-state-logo"))
+    let image = UIImageView(image: Images.emptyStateLogo)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
