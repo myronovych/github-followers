@@ -33,6 +33,7 @@ class FavoritesViewController: GFDataLoadingVC {
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.register(GFFavoriteTableViewCell.self, forCellReuseIdentifier: GFFavoriteTableViewCell.reuseIdentifier)
+        tableView.tableFooterView = UIView()
         
         tableView.rowHeight = 80
         tableView.frame = view.bounds
@@ -94,12 +95,13 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         guard editingStyle == .delete else { return }
         let favorite = favorites[indexPath.row]
         
-        favorites.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .left)
-        
         PersistenceManager.updateWith(follower: favorite, action: .remove) {[weak self] (error) in
             guard let self = self else { return }
-            guard let error = error else { return }
+            guard let error = error else {
+                self.favorites.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .left)
+                return
+            }
             self.presentGFAlert(titleText: "Error occured", message: error.rawValue, buttonText: "OK")
             
         }
